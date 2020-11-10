@@ -4,8 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "build": "next build && next export"
   },
   "dependencies": {
     "goober": "^2.0.2",
