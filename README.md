@@ -1,27 +1,44 @@
-# Example with goober
+# next-goober-extract_css-repro
 
-This is an example of how [🥜 goober](https://github.com/cristianbote/goober) can be used with `Next.js` to fully render a SSR website or app. [🥜 goober](https://github.com/cristianbote/goober) proposal is: "a less than 1KB css-in-js alternative with a familiar API" and offering the same functionality one would need.
+## About this repo
 
-If you are running into any issues with this example, feel free to open-up an issue at https://github.com/cristianbote/goober/issues.
+- Next.js app using goober
+  - based on `npx create-next-app --example with-goober with-goober-app`
+- 4 static pages
+  - `/foo`, `/bar`, `/baz`, `/qux`
+  - exported by `next build && next export`
+- `/foo` and `/baz` have the same content
+  - import styled component
+  - but always return not-styled `div`
+- `/bar` and `/qux` have the same content
+  - import styled component
+  - and always return styled component
+- Use `extractCss` to pre-render critical CSS
 
-Why is there a peanut emoji?
+## Expectation
 
-Goober initially started with a slogan as "a less than 1KB css-in-js library at the cost of _peanuts_". Goober also means a kind of peanut so, it fits!
+Check `export/*.html` have correct `<style id="goober" />` output or NOT.
 
-## Deploy your own
+Expect,
 
-Deploy the example using [Vercel](https://vercel.com/now):
+- `foo.html` and `baz.html` have the same output
+  - no extracted CSS
+  - because styled component does not exists at pre-rendering
+- `bar.html` and `qux.html` have the same output
+  - extracted CSS
+  - because styled component exists at pre-rendering
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/next.js/tree/canary/examples/with-goober)
+## Actual results
 
-## How to use
+Exported and extracted CSS are different for each build.
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+For example(committed in this repo),
 
-```bash
-npx create-next-app --example with-goober with-goober-app
-# or
-yarn create next-app --example with-goober with-goober-app
-```
+|          | expected             | actual                    |
+| -------- | -------------------- | ------------------------- |
+| foo.html | has no extracted CSS | :ok: has no extracted CSS |
+| bar.html | has extracted CSS    | :ng: has extracted CSS    |
+| baz.html | has no extracted CSS | :ok: has extracted CSS    |
+| qux.html | has extracted CSS    | :ok: has extracted CSS    |
 
-Deploy it to the cloud with [Vercel](https://vercel.com/import?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+There are also opposite pattern.
