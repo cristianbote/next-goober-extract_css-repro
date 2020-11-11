@@ -1,5 +1,7 @@
 # next-goober-extract_css-repro
 
+Refs: https://github.com/cristianbote/goober/issues/158
+
 ## About this repo
 
 - Next.js app using goober
