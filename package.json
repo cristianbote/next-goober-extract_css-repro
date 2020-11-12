@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "next",
-    "build": "next build && next export -o export"
+    "build": "next build && next export -o export",
+    "test": "node test.js"
   },
   "dependencies": {
     "goober": "^2.0.2",
