@@ -5,12 +5,12 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export -o export",
-    "test": "node test.js"
+    "test": "rm -rf .next export && npm run build && node test.js"
   },
   "dependencies": {
-    "goober": "^2.0.2",
-    "next": "^9.5.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "goober": "^2.0.15",
+    "next": "latest",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   }
 }

@@ -3,7 +3,9 @@ const path = require('path');
 
 const exported = readdirSync(path.resolve(__dirname, 'export'));
 
-console.log('Testing:\n', exported.join('\n'))
+console.log('Testing:\n', exported.join('\n'), '\n')
+
+console.log('Results:');
 
 exported.forEach(filename => {
     if (filename.slice(-5) === '.html' && filename.slice(0, 3) !== '404') {
