@@ -1,7 +1,9 @@
 import { css } from "goober";
 
 export const Layout = ({ children }) => (
-  <section className={style}>
+  <section className={css`
+  background-color: gold;
+`}>
     <div>{children}</div>
     <hr />
     <a href="/foo">foo</a> |
@@ -11,7 +13,3 @@ export const Layout = ({ children }) => (
     <a href="/quux">quux</a>
   </section>
 );
-
-const style = css`
-  background-color: gold;
-`;
